@@ -1,0 +1,69 @@
+<!-- Navigation menu -->
+<header>
+    <ul>
+      <li><a class="title2" routerLink="/">Home</a></li>
+      <li><a class="title2" routerLink="/cards">Cards</a></li>
+    </ul>
+
+</header>
+
+<!-- Button to add 10 more users -->
+  <button class="button1" (click)="addTenPersons()">Add 10 Users more</button>
+<!-- Filter by gender  -->
+    <label  for="filter-by">Filter by:</label>
+    <select class="select-list" id="gender-filter" [(ngModel)]="gender" (change)="getUsersByGender()">
+      <option value=""> -- Select --</option>
+      <option value="male">filter by : Male</option>
+      <option value="female">filter by :Female</option>
+    </select>
+  <!-- Sort -->
+  <div>
+    <label  for="sort-by">Sort by:</label>
+    <select class="select-list" id="sort-by" [(ngModel)]="sortBy" (change)="sortUsers()">
+      <option value="">-- Select --</option>
+      <option value="name-asc">Name (asc)</option>
+      <option value="name-desc">Name (desc)</option>
+      <option value="dob-asc">Birthday (asc)</option>
+    </select>
+  </div>
+
+<!-- User Cards -->
+<div class="row">
+  <div *ngFor="let user of users; let i = index" class="col s12 m6 l4 xl3">
+    <div class="card">
+      <!-- Delete button -->
+      <i class="material-icons" (click)="deleteUser(i)">delete</i>
+      <span class="card-title">{{ user.name.title }} {{ user.name.first }} {{ user.name.last }}</span>
+      <div class="card-image-container">
+        <div class="card-image">
+          <img [src]="user.picture.large" alt="User image">
+        </div>
+      </div>
+
+      <!-- Information bar -->
+      <ul class="info-bar info-container">
+        <li class="info-item" (mouseover)="mouseIn[i][0] = true" (mouseleave)="mouseIn[i][0] = false">
+          <i class="material-icons">email</i>
+          <span class=" info-email " [ngClass]="{ 'info': showInfos[i][0] || mouseIn[i][0] }" *ngIf="showInfos[i][0] || mouseIn[i][0]"><p> My email address is</p> {{ user.email }}</span>
+        </li>
+        <li class="info-item" (mouseover)="mouseIn[i][1] = true" (mouseleave)="mouseIn[i][1] = false">
+          <i class="material-icons">phone</i>
+          <span class="info-phone" [ngClass]="{ 'info': showInfos[i][2] || mouseIn[i][1] }" *ngIf="showInfos[i][1] || mouseIn[i][1]"><p> My phone number is</p>{{ user.phone }}</span>
+        </li>
+        <li class="info-item" (mouseover)="mouseIn[i][2] = true" (mouseleave)="mouseIn[i][2] = false">
+          <i class="material-icons">cake</i>
+          <span  class="info-birthDay" [ngClass]="{ 'info': showInfos[i][2] || mouseIn[i][2] }" *ngIf="showInfos[i][2] || mouseIn[i][2]"><p> My birthday is</p>{{ user.dob.date| date:'dd/M/yyyy' }}</span>
+        </li>
+        <li class="info-item" (mouseover)="mouseIn[i][3] = true" (mouseleave)="mouseIn[i][3] = false">
+          <i class="material-icons">location_on</i>
+          <span class="info-adress" [ngClass]="{ 'info': showInfos[i][3] || mouseIn[i][3] }" *ngIf="showInfos[i][3] || mouseIn[i][3]"><p> My address is</p>{{ user.location.street.number }} {{ user.location.street.name }}, <br> {{ user.location.city }}, {{ user.location.state }},{{ user.location.postcode }}</span>
+        </li>
+        <li class="info-item" (mouseover)="mouseIn[i][4] = true" (mouseleave)="mouseIn[i][4] = false">
+          <i class="material-icons">key</i>
+          <span class="info-password" [ngClass]="{ 'info': showInfos[i][4] || mouseIn[i][4] }" *ngIf="showInfos[i][4] || mouseIn[i][4]"> <p> My password is</p> {{ user.login.password }}</span>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<header>
+  <h1 class="title1">Users Cards</h1>
+</header>
+
+  <!--Container for the form to display the number of user cards-->
+  <div class="button-container">
+  <form (submit)="onSubmit()">
+    <label for="num-cards">Number of cards:</label>
+    <input type="number" id="nb-cards" name="numberOfCards" [(ngModel)]="numberOfCards">
+    <button class="title2" type="submit">Display cards</button>
+  </form>
+   <!--Information for user the user if he doesn't choose a number of cards-->
+  <a class="normal-text">*If no number of cards is chosen, <br>20 cards will be displayed by default.</a>
+  </div>
